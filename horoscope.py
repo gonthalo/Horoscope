@@ -2,6 +2,7 @@ import urllib, urllib2
 from lxml import html
 import re
 from random import random
+from time import time
 
 def stringy(num):
 	s = str(num)
@@ -98,8 +99,9 @@ def convertir(mierda):
 	return "=" + prov
 
 #get2015data()
+t0 = time()
 horoscopos = open('2015data.txt', 'r')
-coleccion = horoscopos.readlines()[:336]
+coleccion = horoscopos.readlines()[:2016]
 coleccion = map(procesar, coleccion)
 words = list(set(juntar(coleccion)))
 
@@ -119,6 +121,8 @@ for hor in coleccion:
 	for ii in range(2, len(hor)):
 		matriz[prefs.index(previos(hor, ii))][words.index(hor[ii])] += 1
 
+t0 = time() - t0
+
 def generate():
 	new_hor = ['start', 'start']
 	while True:
@@ -131,3 +135,5 @@ def generate():
 
 for jjj in range(642):
 	generate()
+
+print 'time: ', t0
