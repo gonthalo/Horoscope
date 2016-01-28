@@ -13,6 +13,7 @@ def stringy(num):
 dias = [stringy(num) for num in range(1, 29)]
 meses = [stringy(num) for num in range(1, 13)]
 signos = ['acuario', 'aries', 'cancer', 'capricornio', 'escorpio', 'geminis', 'leo', 'libra', 'piscis', 'sagitario', 'tauro', 'virgo']
+
 mayu = 'QWERTYUIOPLKJHGFDSAZXCVBNM'
 minu = 'qwertyuioplkjhgfdsazxcvbnm'
 
@@ -40,13 +41,11 @@ def mierda(d, m, s):
 def get2015data():
 	archivo = open("2015data.txt", "w")
 	count = 0
-	for mes in meses:
-		for dia in dias:
-			for signo in signos:
-				archivo.write(get_text(mierda(dia, mes, signo)).encode('utf8') + '\n')
-				count += 1
-				if count%10==0:
-					print count, "de", 12*12*28, "horoscopos"
+	for dia,mes,signo in [(dia,mes,signo) for dia in dias for mes in meses for signo in signos]:
+		archivo.write(get_text(mierda(dia, mes, signo)).encode('utf8') + '\n')
+		count += 1
+		if count%10==0:
+			print count, "de", 12*12*28, "horoscopos"
 	archivo.close()
 
 def procesar(strin):
